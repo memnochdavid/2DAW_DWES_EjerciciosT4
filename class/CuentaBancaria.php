@@ -1,6 +1,15 @@
 <?php
+
+
+
+
+
 //sé que el ejercicio pide sólo que tenga la propiedad saldo, pero eso es muy poca chicha,
 //le voy a añadir titular, e IBAN
+
+require "./error/ErrorIBAN.php";
+require "./error/ErrorSaldoInsuficiente.php";
+
 class CuentaBancaria
 {
     public string $iban{
@@ -15,19 +24,23 @@ class CuentaBancaria
     {
         $this->saldo += $importe;
     }
-    public function retirar($importe): void{
 
-        $this->saldo -= $importe;
+    /**
+     * @throws ErrorSaldoInsuficiente
+     */
+    public function retirar($importe): void{
+        if($this->saldo < $importe){
+            throw new ErrorSaldoInsuficiente();
+        }
+        else{
+            $this->saldo -= $importe;
+        }
     }
     public function consultarSaldo(): float{
         return $this->saldo;
     }
 
     /**
-     * Constructor de la cuenta bancaria.
-     * * @param string $iban El código IBAN.
-     * @param string $titular El nombre del titular.
-     * @param float $saldo Saldo inicial.
      * @throws ErrorIBAN Si el formato del IBAN no es válido
      */
     public function __construct(
@@ -43,10 +56,6 @@ class CuentaBancaria
         $this->saldo = $saldo;
     }
 
-
-
-
-
     private function validaIBAN(string $iban): bool{
         $iban = strtoupper(str_replace([' ', '-'], '', $iban));
         //IA: Debe empezar por 2 letras (País), 2 números (Dígitos control) y resto alfanumérico
@@ -57,16 +66,3 @@ class CuentaBancaria
     }
 }
 
-class ErrorIBAN extends Exception
-{
-    public function __construct($message = "El formato del IBAN no es válido", $code = 0, Throwable $previous = null) {
-        parent::__construct($message, $code, $previous);
-    }
-}
-class ErrorSaldoInsuficiente extends Exception
-{
-    public function __construct(string $message = "", int $code = 0, ?Throwable $previous = null)
-    {
-        parent::__construct($message = "El resultado de esta operación daría un saldo negativo: DENEGADO, PUTO POBRE.", $code, $previous);
-    }
-}
