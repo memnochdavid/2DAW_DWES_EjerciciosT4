@@ -67,6 +67,6 @@ function execEjercicios(): void
 
 try {
     execEjercicios();
-} catch (ErrorIBAN $e) {
-    echo $e -> getMessage();
+} catch (ErrorIBAN|ErrorSalarioIncorrecto|ErrorSaldoNegativo $e) {
+    echo $e->getMessage();
 }
