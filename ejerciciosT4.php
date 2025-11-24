@@ -8,6 +8,8 @@ require_once __DIR__ . '/class/ej03/CuentaBancaria.php';
 require_once __DIR__ . '/class/ej04/Empleado.php';
 require_once __DIR__ . '/class/ej05/Circulo.php';
 require_once __DIR__ . '/class/ej05/Rectangulo.php';
+require_once __DIR__ . '/class/ej06/Triangulo.php';
+require_once __DIR__ . '/class/ej06/Cuadrado.php';
 
 function validaInput($mensaje, $tipo): false|string|null
 {
@@ -61,6 +63,14 @@ function execEjercicios(): void
             echo "\n";
             $rectangulo = new Rectangulo(4,8);
             echo $rectangulo->toString();
+            break;
+        case 6:
+            $triangulo = new Triangulo("Triángulo","Rojo", 5, 3);
+            echo $triangulo->toString();
+            echo "\n";
+            $cuadrado = new Cuadrado("Cuadrado","Verde", 5);
+            echo $cuadrado->toString();
+
             break;
     }
 }
