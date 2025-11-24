@@ -5,10 +5,11 @@
 
 
 //sé que el ejercicio pide sólo que tenga la propiedad saldo, pero eso es muy poca chicha,
-//le voy a añadir titular, e IBAN
+//le voy a añadir titular, e IBAN y voy a crear las clases con los errores
 
-require "./error/ErrorIBAN.php";
-require "./error/ErrorSaldoInsuficiente.php";
+require_once __DIR__ . '/../error/ErrorIBAN.php';
+require_once __DIR__ . '/../error/ErrorSaldoInsuficiente.php';
+require_once __DIR__ . '/../error/ErrorSaldoNegativo.php';
 
 class CuentaBancaria
 {
@@ -36,12 +37,12 @@ class CuentaBancaria
             $this->saldo -= $importe;
         }
     }
-    public function consultarSaldo(): float{
-        return $this->saldo;
+    public function consultarSaldo(): string{
+        return "Saldo de la cuenta ".$this->iban.": ".$this->saldo;
     }
 
     /**
-     * @throws ErrorIBAN Si el formato del IBAN no es válido
+     * @throws ErrorIBAN|ErrorSaldoNegativo Si el formato del IBAN no es válido
      */
     public function __construct(
         string $iban,
@@ -51,9 +52,14 @@ class CuentaBancaria
         if (!$this->validaIBAN($iban)) {
             throw new ErrorIBAN("El IBAN introducido ($iban) es incorrecto.");
         }
-        $this->iban = $iban;
-        $this->titular = $titular;
-        $this->saldo = $saldo;
+        else if($saldo < 0){
+            throw new ErrorSaldoNegativo();
+        }
+        else{
+            $this->iban = $iban;
+            $this->titular = $titular;
+            $this->saldo = $saldo;
+        }
     }
 
     private function validaIBAN(string $iban): bool{
