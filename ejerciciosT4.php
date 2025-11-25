@@ -10,6 +10,7 @@ require_once __DIR__ . '/class/ej05/Circulo.php';
 require_once __DIR__ . '/class/ej05/Rectangulo.php';
 require_once __DIR__ . '/class/ej06/Triangulo.php';
 require_once __DIR__ . '/class/ej06/Cuadrado.php';
+require_once __DIR__ . '/class/ej07/Articulo.php';
 
 function validaInput($mensaje, $tipo): false|string|null
 {
@@ -70,7 +71,10 @@ function execEjercicios(): void
             echo "\n";
             $cuadrado = new Cuadrado("Cuadrado","Verde", 5);
             echo $cuadrado->toString();
-
+            break;
+        case 7:
+            $articulo = new Articulo(1, "Cubo", "Un cubo para fregar", 5.95);
+            echo $articulo->toString();
             break;
     }
 }
