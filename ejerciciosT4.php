@@ -11,6 +11,9 @@ require_once __DIR__ . '/class/ej05/Rectangulo.php';
 require_once __DIR__ . '/class/ej06/Triangulo.php';
 require_once __DIR__ . '/class/ej06/Cuadrado.php';
 require_once __DIR__ . '/class/ej07/Articulo.php';
+require_once __DIR__ . '/class/ej08/Libro.php';
+require_once __DIR__ . '/class/ej08/Revista.php';
+require_once __DIR__ . '/class/ej08/DVD.php';
 
 function validaInput($mensaje, $tipo): false|string|null
 {
@@ -29,6 +32,7 @@ function validaInput($mensaje, $tipo): false|string|null
  * @throws ErrorIBAN
  * @throws ErrorSaldoNegativo
  * @throws ErrorSalarioIncorrecto
+ * @throws ErrorMaterialNoDisponible
  *
  */
 function execEjercicios(): void
@@ -76,11 +80,41 @@ function execEjercicios(): void
             $articulo = new Articulo(1, "Cubo", "Un cubo para fregar", 5.95);
             echo $articulo->toString();
             break;
+        case 8:
+            $libro1 = new Libro("Harry Potter y la Piedra Filosofal", "JK Rowling", "ASD234ASD", "Primer libro de la saga");
+            $libro1->prestar();
+            $libro1->puntuar(3);
+            $libro1->puntuar(3);
+            $libro1->puntuar(3);
+            echo $libro1->toString();
+            echo "\n";
+
+            $revista1 = new Revista("Penthouse", "Penthouse SA", "17/09/2006", "Just for men");
+            $revista1->puntuar(9999);
+            $revista1->puntuar(9999);
+            $revista1->puntuar(9999);
+            $revista1->puntuar(9999);
+            $revista1->puntuar(9999);
+            echo $revista1->toString();
+            echo "\n";
+
+            $dvd1 = new DVD("Die Hard", "John McTiernan", 12354, "McClaaaaaaiiiiinnnnnnn!!!!!!", 132);
+            $dvd1->puntuar(9999999999);
+            $dvd1->puntuar(9999999999);
+            $dvd1->puntuar(9999999999);
+            $dvd1->puntuar(9999999999);
+            $dvd1->puntuar(9999999999);
+            $dvd1->puntuar(9999999999);
+            $dvd1->puntuar(9999999999);
+            echo $dvd1->toString();
+
+
+            break;
     }
 }
 
 try {
     execEjercicios();
-} catch (ErrorIBAN|ErrorSalarioIncorrecto|ErrorSaldoNegativo $e) {
+} catch (ErrorIBAN|ErrorSalarioIncorrecto|ErrorSaldoNegativo|ErrorMaterialNoDisponible $e) {
     echo $e->getMessage();
 }
