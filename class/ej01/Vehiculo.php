@@ -22,7 +22,7 @@ class Vehiculo
     }
 
     public function toString():string{
-        return "Vehículo: {brand: $this->brand, model: $this->model, year: $this->year}";
+        return "Vehículo: {brand: $this->brand, model: $this->model, year: $this->year}\n";
     }
 
     public function __construct(

@@ -1,7 +1,5 @@
 <?php
 
-
-
 require_once __DIR__ . '/class/ej01/Vehiculo.php';
 require_once __DIR__ . '/class/ej02/Coche.php';
 require_once __DIR__ . '/class/ej03/CuentaBancaria.php';
@@ -19,20 +17,37 @@ function validaInput($mensaje, $tipo): false|string|null
 {
     $input = readline($mensaje);
 
-    switch ($tipo) {
-        case 'int':
-            return filter_var($input, FILTER_VALIDATE_FLOAT) !== false ? $input : null;
-        //se pueden añadir más casas para cada tipo
-        default:
-            return null;
-    }
+    return match ($tipo) {
+        'int' => filter_var($input, FILTER_VALIDATE_FLOAT) !== false ? $input : null,
+        default => null,
+    };
 }
+
+
+
+//OJO -- resultado del aburrimiento
+//se me ocurrió buscar en internet (le pregunté a Gemini XD) si se puede crear una función que sirva para instanciar clases, y me dijo
+//que eso se llama "Patrón Factory (Fábrica) o instanciación dinámica", cosa que me suena que vi en las prácticas del año pasado en Java.
+//Lo había olvidado completamente XD
+
+/**
+ * @throws Exception
+ */
+function crearObjeto(string $nombreClase, mixed ...$args): object
+{
+    if (!class_exists($nombreClase)) {
+        throw new Exception("Error: La clase '$nombreClase' no existe.");
+    }
+    return new $nombreClase(...$args);
+}
+
 
 /**
  * @throws ErrorIBAN
  * @throws ErrorSaldoNegativo
  * @throws ErrorSalarioIncorrecto
  * @throws ErrorMaterialNoDisponible
+ * @throws Exception
  *
  */
 function execEjercicios(): void
@@ -44,29 +59,41 @@ function execEjercicios(): void
 
     switch($ejecutaEj){
         case 1:
-            //se instancia la clase
-            $vehiculo = new Vehiculo("Seat", "León", 1998);
+            //se instancia con Patron Factory
+            $vehiculo = crearObjeto("Vehiculo", "Seat", "León", 1998);
+            //se instancia la clase - clásico
+//            $vehiculo = new Vehiculo("Seat", "León", 1998);
             echo $vehiculo->toString();
             break;
         case 2:
-            $coche = new Coche("Seat", "León", 1998, 4);
+            //se instancia con Patron Factory
+            $coche = crearObjeto("Coche", "Seat", "León", 1998, 4);
+//            $coche = new Coche("Seat", "León", 1998, 4);
             echo $coche->toString();
             break;
         case 3:
+            //PF
+            $cuentaBancaria = crearObjeto("CuentaBancaria","ES2114650123456789012345", "Nombre Cliente", 10);
+
             //IBAN: Debe empezar por 2 letras (País), 2 números (Dígitos control) y resto alfanumérico
-            $cuentaBancaria = new CuentaBancaria("ES2114650123456789012345", "Nombre Cliente", 10);
+//            $cuentaBancaria = new CuentaBancaria("ES2114650123456789012345", "Nombre Cliente", 10);
             echo $cuentaBancaria -> consultarSaldo();
             break;
         case 4:
-            $empleado = new Empleado("", 1000);
+            $empleado = crearObjeto("Empleado", "Anónimo", 1000);
+//            $empleado = new Empleado("", 1000);
+            //se usan el setter
             $empleado->nombre = "Alberto Ejemplo";
             echo $empleado->toString();
             break;
         case 5:
-            $circulo = new Circulo(5);
+            $circulo = crearObjeto("Circulo", 5);
+
+            //$circulo = new Circulo(5);
             echo $circulo->toString();
             echo "\n";
-            $rectangulo = new Rectangulo(4,8);
+//            $rectangulo = new Rectangulo(4,8);
+            $rectangulo = crearObjeto("Rectangulo", 4,8);
             echo $rectangulo->toString();
             break;
         case 6:
