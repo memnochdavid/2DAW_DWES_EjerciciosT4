@@ -60,55 +60,62 @@ function execEjercicios(): void
     switch($ejecutaEj){
         case 1:
             //se instancia con Patron Factory
-            $vehiculo = crearObjeto("Vehiculo", "Seat", "León", 1998);
+            $vehiculo = crearObjeto(Vehiculo::class, "Seat", "León", 1998);
             //se instancia la clase - clásico
 //            $vehiculo = new Vehiculo("Seat", "León", 1998);
-            echo $vehiculo->toString();
+        echo $vehiculo->toString();
             break;
         case 2:
             //se instancia con Patron Factory
-            $coche = crearObjeto("Coche", "Seat", "León", 1998, 4);
+            $coche = crearObjeto(Coche::class, "Seat", "León", 1998, 4);
 //            $coche = new Coche("Seat", "León", 1998, 4);
             echo $coche->toString();
             break;
         case 3:
             //PF
-            $cuentaBancaria = crearObjeto("CuentaBancaria","ES2114650123456789012345", "Nombre Cliente", 10);
+            $cuentaBancaria = crearObjeto(CuentaBancaria::class,"ES2114650123456789012345", "Nombre Cliente", 10);
 
             //IBAN: Debe empezar por 2 letras (País), 2 números (Dígitos control) y resto alfanumérico
 //            $cuentaBancaria = new CuentaBancaria("ES2114650123456789012345", "Nombre Cliente", 10);
             echo $cuentaBancaria -> consultarSaldo();
             break;
         case 4:
-            $empleado = crearObjeto("Empleado", "Anónimo", 1000);
+            $empleado = crearObjeto(Empleado::class, "Anónimo", 1000);
 //            $empleado = new Empleado("", 1000);
             //se usan el setter
             $empleado->nombre = "Alberto Ejemplo";
             echo $empleado->toString();
             break;
         case 5:
-            $circulo = crearObjeto("Circulo", 5);
+            $circulo = crearObjeto(Circulo::class, 5);
 
             //$circulo = new Circulo(5);
             echo $circulo->toString();
             echo "\n";
 //            $rectangulo = new Rectangulo(4,8);
-            $rectangulo = crearObjeto("Rectangulo", 4,8);
+            $rectangulo = crearObjeto(Rectangulo::class, 4,8);
             echo $rectangulo->toString();
             break;
         case 6:
-            $triangulo = new Triangulo("Triángulo","Rojo", 5, 3);
+//            $triangulo = new Triangulo("Triángulo","Rojo", 5, 3);
+            $triangulo = crearObjeto(Triangulo::class,"Triángulo", "Rojo",4,8);
             echo $triangulo->toString();
             echo "\n";
-            $cuadrado = new Cuadrado("Cuadrado","Verde", 5);
+//            $cuadrado = new Cuadrado("Cuadrado","Verde", 5);
+            $cuadrado = crearObjeto(Cuadrado::class,"Cuadrado", "Verde", 5);
+
             echo $cuadrado->toString();
+            echo "\n";
             break;
         case 7:
-            $articulo = new Articulo(1, "Cubo", "Un cubo para fregar", 5.95);
+//            $articulo = new Articulo(1, "Cubo", "Un cubo para fregar - just for women", 5.95);
+            $articulo = crearObjeto(Articulo::class, 1,"Cubo", "Cubo para fregar - just for women", 5.95);
             echo $articulo->toString();
             break;
         case 8:
-            $libro1 = new Libro("Harry Potter y la Piedra Filosofal", "JK Rowling", "ASD234ASD", "Primer libro de la saga");
+//            $libro1 = new Libro("Harry Potter y la Piedra Filosofal", "JK Rowling", "ASD234ASD", "Primer libro de la saga");
+            $libro1 = crearObjeto(Libro::class,"Harry Potter y la Piedra Filosofal", "JK Rowling", "ASD234ASD", "Primer libro de la saga");
+
             $libro1->prestar();
             $libro1->puntuar(3);
             $libro1->puntuar(3);
@@ -116,7 +123,8 @@ function execEjercicios(): void
             echo $libro1->toString();
             echo "\n";
 
-            $revista1 = new Revista("Penthouse", "Penthouse SA", "17/09/2006", "Just for men");
+//            $revista1 = new Revista("Penthouse", "Penthouse SA", "17/09/2006", "Just for men");
+            $revista1 = crearObjeto(Revista::class, "Penthouse", "Penthouse SA", "17/09/2006", "Just for men");
             $revista1->puntuar(9999);
             $revista1->puntuar(9999);
             $revista1->puntuar(9999);
@@ -125,7 +133,8 @@ function execEjercicios(): void
             echo $revista1->toString();
             echo "\n";
 
-            $dvd1 = new DVD("Die Hard", "John McTiernan", 12354, "McClaaaaaaiiiiinnnnnnn!!!!!!", 132);
+//            $dvd1 = new DVD("Die Hard", "John McTiernan", 12354, "McClaaaaaaiiiiinnnnnnn!!!!!!", 132);
+            $dvd1 = crearObjeto(DVD::class,"Die Hard", "John McTiernan", 12354, "McClaaaaaaiiiiinnnnnnn!!!!!!", 132);
             $dvd1->puntuar(9999999999);
             $dvd1->puntuar(9999999999);
             $dvd1->puntuar(9999999999);
@@ -142,6 +151,6 @@ function execEjercicios(): void
 
 try {
     execEjercicios();
-} catch (ErrorIBAN|ErrorSalarioIncorrecto|ErrorSaldoNegativo|ErrorMaterialNoDisponible $e) {
+} catch (ErrorIBAN|ErrorSalarioIncorrecto|ErrorSaldoNegativo|ErrorMaterialNoDisponible|Exception $e) {
     echo $e->getMessage();
 }
