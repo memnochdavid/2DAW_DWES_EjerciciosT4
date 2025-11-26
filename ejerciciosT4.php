@@ -141,7 +141,7 @@ function execEjercicios(): void
             $dvd1->puntuar(9999999999);
             $dvd1->puntuar(9999999999);
             $dvd1->puntuar(9999999999);
-            $dvd1->puntuar(9999999999);
+            $dvd1->puntuar(0);//algún desgraciado
             echo $dvd1->toString();
 
 
