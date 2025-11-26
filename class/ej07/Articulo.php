@@ -21,7 +21,8 @@ class Articulo
         $this->precio = $precio;
     }
 
-    public function toString(){
+    public function toString(): string
+    {
         return "$this->nombre : {'id': $this->idArticulo, 'nombre': $this->nombre, 'descripcion': '$this->descripcion', 'precio': $this->precio, 'fechaCreacion': '$this->fechaCreacion'}";
     }
 
