@@ -55,7 +55,7 @@ function crearObjeto(string $nombreClase): object
     $parametros = $constructor->getParameters();
     $argumentosParaInstanciar = [];
 
-    echo "\n--- Creando un nuevo " . $reflector->getShortName() . " ---\n";
+    echo "\nCreando un nuevo ".$reflector->getShortName()."\n";
 
     //se van pidiendo valores para cada parámetro
     foreach ($parametros as $param) {
