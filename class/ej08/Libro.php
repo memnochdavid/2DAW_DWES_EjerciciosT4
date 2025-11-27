@@ -37,7 +37,7 @@ class Libro extends Material
     }
 
 
-    public function __construct($titulo,$autor,$iban,$sinopsis,)
+    public function __construct(string $titulo,string $autor,string $iban, string $sinopsis,)
     {
         parent::__construct($titulo,$autor);
         $this->iban = $iban;

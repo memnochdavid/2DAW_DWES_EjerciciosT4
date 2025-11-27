@@ -22,7 +22,7 @@ class Empleado
     /**
      * @throws ErrorSalarioIncorrecto
      */
-    public function __construct($nombre, $salarioMensual){
+    public function __construct(string $nombre, float $salarioMensual){
         $this->nombre = $nombre;
         if($salarioMensual < 0) throw new ErrorSalarioIncorrecto();
         $this->salarioMensual = $salarioMensual;

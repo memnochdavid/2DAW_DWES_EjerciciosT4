@@ -4,18 +4,16 @@ require_once("Figura.php");
 
 class Triangulo extends Figura
 {
-    public string $nombre;
+    public string $nombre="Triángulo";
     public float $base;
     public float $altura;
 
     public function __construct(
-        $nombre,
-        $color,
-        $base,
-        $altura
+        string $color,
+        float $base,
+        float $altura
     ){
         parent::__construct($color);
-        $this->nombre = $nombre;
         $this->base = $base;
         $this->altura = $altura;
     }

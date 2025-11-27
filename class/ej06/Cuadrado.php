@@ -4,16 +4,14 @@ require_once("Figura.php");
 
 class Cuadrado extends Figura
 {
-    public string $nombre;
+    public string $nombre="Cuadrado";
     public float $lado;
 
     public function __construct(
-        $nombre,
-        $color,
-        $lado
+        string $color,
+        float $lado
     ){
         parent::__construct($color);
-        $this->nombre = $nombre;
         $this->lado = $lado;
     }
 

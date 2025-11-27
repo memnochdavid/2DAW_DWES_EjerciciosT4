@@ -35,7 +35,7 @@ class DVD extends Material
     }
 
 
-    public function __construct($titulo,$autor,$id,$sinopsis,$duracion)
+    public function __construct(string $titulo, string $autor,int $id,string $sinopsis,float $duracion)
     {
         parent::__construct($titulo,$autor);
         $this->id = $id;

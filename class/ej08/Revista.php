@@ -32,7 +32,7 @@ class Revista extends Material
     }
 
 
-    public function __construct($titulo,$autor,$publicado,$tematica,)
+    public function __construct(string $titulo,string $autor,string $publicado,string $tematica,)
     {
         parent::__construct($titulo,$autor);
         $this->publicado = $publicado;
